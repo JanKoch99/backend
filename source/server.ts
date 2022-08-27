@@ -2,9 +2,14 @@
 import http from 'http';
 import express, { Express } from 'express';
 import morgan from 'morgan';
-import routes from './routes/posts';
+import pationRoutes from './routes/patientdata';
+import medDataRoutes from './routes/MedData';
+import personRoutes from './routes/personRoutes';
 import {PatientData} from "./model/patientdata";
 import {Sequelize} from 'sequelize';
+import {MedData} from "./model/MedDataModel";
+import {Person} from "./model/PersonModel";
+import {Role} from "./model/RoleModel";
 
 
 export const sequelize: Sequelize = new Sequelize({
@@ -15,6 +20,9 @@ export const sequelize: Sequelize = new Sequelize({
 const router: Express = express();
 
 PatientData.initialize(sequelize);
+MedData.initialize(sequelize);
+Person.initialize(sequelize);
+Role.initialize(sequelize);
 
 /** Logging */
 router.use(morgan('dev'));
@@ -38,7 +46,9 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
-router.use('/', routes);
+router.use('/', pationRoutes);
+router.use('/', medDataRoutes)
+router.use('/', personRoutes)
 
 /** Error handling */
 router.use((req, res, next) => {
