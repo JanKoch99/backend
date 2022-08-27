@@ -1,25 +1,23 @@
-import {MedData} from "../model/MedDataModel";
-import {canTreatArrayAsAnd} from "sequelize/types/utils";
-import {DATE, DATEONLY} from "sequelize";
+import {MedData} from "../model/medData.model";
 import {isNewerDate} from "../shinanigans";
 
 export class MedDataService {
     public static async getMedData(medDataId: number) {
         return MedData.findByPk(medDataId)
-            .then(found => {
+            .then((found: any) => {
                 if (found) {
                     return Promise.resolve(found);
                 } else {
                     return Promise.reject("MedData not found");
                 }
             })
-            .catch(e => {
+            .catch(() => {
                 return Promise.reject('Could not fetch medData')
             });
     }
 
     public static async updateMedData(medDataId: number){
-        return MedData.findByPk(medDataId).then(found => {
+        return MedData.findByPk(medDataId).then((found: null) => {
             if (found != null){
                 return this.updateAmount(found)
                     .then(update => {
@@ -63,8 +61,8 @@ export class MedDataService {
             useCase: body.useCase,
             originalAmount: body.originalAmount,
             amountLeft: body.originalAmount,
-            personId: body.personId
-        }).then(inserted => {
+            patientDataId: body.personId
+        }).then(() => {
             return Promise.resolve('Entry successfully created')
         }).catch(() => {
             return Promise.reject('Could not create entry')

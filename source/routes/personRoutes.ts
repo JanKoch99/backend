@@ -1,8 +1,8 @@
 /** source/routes/posts.ts */
 import express from 'express';
-import controller from '../controllers/personController';
+import controller from '../controllers/person.controller';
 const router = express.Router();
 
-router.get('/person/:id', controller.getPerson);
+router.get('/person/login', controller.getPerson);
 
 export = router;

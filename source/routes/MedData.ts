@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/MedData';
+import controller from '../controllers/MedData.controller';
 const router = express.Router();
 
 //router.get('/posts', controller.getPosts); get ALl for history

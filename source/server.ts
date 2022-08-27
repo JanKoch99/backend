@@ -1,28 +1,42 @@
 /** source/server.ts */
 import http from 'http';
-import express, { Express } from 'express';
+import express, {application, Express} from 'express';
 import morgan from 'morgan';
 import pationRoutes from './routes/patientdata';
 import medDataRoutes from './routes/MedData';
 import personRoutes from './routes/personRoutes';
-import {PatientData} from "./model/patientdata";
+import {PatientdataModel} from "./model/patientdata.model";
 import {Sequelize} from 'sequelize';
-import {MedData} from "./model/MedDataModel";
-import {Person} from "./model/PersonModel";
-import {Role} from "./model/RoleModel";
+import {MedData} from "./model/medData.model";
+import {Person} from "./model/person.model";
+import {Role} from "./model/role.model";
 
 
 export const sequelize: Sequelize = new Sequelize({
+    host: 'localhost',
     dialect: 'sqlite',
     storage: 'db.sqlite',
-    logging: false // can be set to true for debugging
+    logging: true// can be set to true for debugging
 });
-const router: Express = express();
 
-PatientData.initialize(sequelize);
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch((err: any) => {
+        console.error('Unable to connect to the database:', err);
+    });
+
+
+
+PatientdataModel.initialize(sequelize);
 MedData.initialize(sequelize);
 Person.initialize(sequelize);
 Role.initialize(sequelize);
+
+
+const router: Express = express();
 
 /** Logging */
 router.use(morgan('dev'));
@@ -62,3 +76,21 @@ router.use((req, res, next) => {
 const httpServer = http.createServer(router);
 const PORT: any = process.env.PORT ?? 6060;
 httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
+
+/** Insert data */
+
+console.log("All models were synchronized successfully.");
+    Role.create({id:0, auth: 'ROLE_APOTHEKER'})
+    Role.create({id:1, auth: 'ROLE_PATIENT'})
+    Role.create({id:2, auth: 'ROLE_DOCTER'})
+
+    // Docter
+    Person.create({id:0, userName: 'docter', password: 'docter1', patientDataId: undefined, roleId: 3})
+
+    // Apotheker
+    Person.create({id:1, userName: 'apotheker', password: 'apotheker1', patientDataId: undefined, roleId: 1})
+
+    // Person
+    MedData.create({id:0, doctorId:0, dateOfIssue: new Date().toString(), drug: 'Testdrug', validUntil: new Date().toString(), useCase: 'Nie', originalAmount: 2, amountLeft: 2, patientDataId: 0})
+    PatientdataModel.create({id:0, address: 'Teststrasse2', aftername: 'test', city: 'testcity', medDataId: 0, prename: 'person', sex: 'male', zip:1000})
+    Person.create({id:2, userName: 'patient', password: 'patient1', patientDataId: 0, roleId: 2})

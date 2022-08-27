@@ -1,4 +1,4 @@
-import {Role} from "../model/RoleModel";
+import {Role} from "../model/role.model";
 
 export class RoleService {
     public static async getRole(roleId: number) {
