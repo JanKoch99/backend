@@ -4,7 +4,7 @@ export interface MedDataAttributes {
     id: Number;
     dateOfIssue: String;
     drug: String;
-    validUntil: Date;
+    validUntil: String;
     useCase: String;
     doctorId: Number;
     originalAmount: Number;
@@ -17,7 +17,7 @@ export class MedData extends Model<MedDataAttributes> implements MedDataAttribut
     doctorId: Number;
     dateOfIssue: String;
     drug: String;
-    validUntil: Date;
+    validUntil: String;
     useCase: String;
     originalAmount: Number;
     amountLeft: Number;
@@ -44,7 +44,7 @@ export class MedData extends Model<MedDataAttributes> implements MedDataAttribut
                     allowNull: false
                 },
                 validUntil: {
-                    type: DataTypes.DATE,
+                    type: DataTypes.STRING,
                     allowNull: false
                 },
                 useCase: {

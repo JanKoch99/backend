@@ -1,6 +1,7 @@
 import {MedData} from "../model/MedDataModel";
 import {canTreatArrayAsAnd} from "sequelize/types/utils";
-import {DATE} from "sequelize";
+import {DATE, DATEONLY} from "sequelize";
+import {isNewerDate} from "../shinanigans";
 
 export class MedDataService {
     public static async getMedData(medDataId: number) {
@@ -32,7 +33,7 @@ export class MedDataService {
     }
 
     private static async updateAmount(receipt: any) {
-        if (receipt.validUntil < new ) {
+        if (isNewerDate(receipt.validUntil, new Date())) {
             return Promise.reject('Medicalprescription is not valid.');
         } else if (receipt.amountLeft < 1) {
             return Promise.reject('Already been redeemed ' + receipt.amountLeft + '/' + receipt.originalAmount + ' times.');
@@ -69,6 +70,5 @@ export class MedDataService {
             return Promise.reject('Could not create entry')
         });
     }
-
 
 }
