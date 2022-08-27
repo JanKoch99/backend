@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
     "module": "commonjs",
     "esModuleInterop": true,
     "outDir": "./build",

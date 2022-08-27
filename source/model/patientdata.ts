@@ -12,7 +12,7 @@ export interface PatientDataAttributes {
 }
 
 export class PatientData extends Model<PatientDataAttributes> implements PatientDataAttributes{
-    address: String | undefined;
+    address: String;
     aftername: String;
     city: String;
     id: Number;
@@ -60,7 +60,7 @@ export class PatientData extends Model<PatientDataAttributes> implements Patient
         },
             {
                 sequelize,
-                tableName: 'patientdata'
+                tableName: 'patient_data'
             });
     }
 }
