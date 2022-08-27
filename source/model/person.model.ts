@@ -1,6 +1,7 @@
-import {DataTypes, Model, Sequelize} from 'sequelize';
+import {DataTypes, Model} from 'sequelize';
+import db from "../config/database.config";
 
-export interface PersonAttributes {
+interface PersonAttributes {
     id: number;
     userName: string;
     password: string;
@@ -9,41 +10,36 @@ export interface PersonAttributes {
 }
 
 
-export class Person extends Model<PersonAttributes> implements PersonAttributes{
-    id: number;
-    userName: string;
-    password: string;
-    patientDataId: number | undefined;
-    roleId: number;
+export class Person extends Model<PersonAttributes> {}
 
-
-    public static initialize(sequelize: Sequelize) {
-        Person.init({
-                id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    autoIncrement: true
-                },
-                userName: {
-                    type: DataTypes.STRING,
-                    allowNull: false
-                },
-                password: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
-                patientDataId: {
-                    type: DataTypes.INTEGER,
-                    allowNull: true
-                },
-                roleId: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false
-                }
-            },
-            {
-                sequelize,
-                tableName: 'person'
-            });
+Person.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        userName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        patientDataId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        roleId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        }
+    },
+    {
+        sequelize:db,
+        tableName: 'person'
     }
-}
+)
+
+

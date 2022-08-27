@@ -1,6 +1,7 @@
-import {DataTypes, Model, Sequelize} from 'sequelize';
+import {DataTypes, Model} from 'sequelize';
+import db from "../config/database.config";
 
-export interface PatientDataAttributes {
+interface PatientDataAttributes {
     medDataId: number;
     id: number;
     prename: string;
@@ -11,56 +12,46 @@ export interface PatientDataAttributes {
     city: string;
 }
 
-export class PatientdataModel extends Model<PatientDataAttributes> implements PatientDataAttributes{
-    address: string;
-    aftername: string;
-    city: string;
-    id: number;
-    medDataId: number;
-    prename: string;
-    sex: string;
-    zip: number;
+export class PatientdataModel extends Model<PatientDataAttributes> {}
 
-
-    public static initialize(sequelize: Sequelize) {
-        PatientdataModel.init({
-            address: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            aftername: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            city: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            medDataId: {
-                type: DataTypes.INTEGER,
-                allowNull: true
-            },
-            prename: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            sex: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            zip: {
-                type: DataTypes.STRING,
-                allowNull: false
-            }
+PatientdataModel.init(
+    {
+        address: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-            {
-                sequelize,
-                tableName: 'patient_data'
-            });
+        aftername: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        medDataId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        prename: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        sex: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        zip: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    },
+    {
+        sequelize:db,
+        tableName: 'patient_data'
     }
-}
+)
