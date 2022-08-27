@@ -3,8 +3,18 @@ import http from 'http';
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import routes from './routes/posts';
+import {PatientData} from "./model/patientdata";
+import {Sequelize} from 'sequelize';
 
+
+export const sequelize: Sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'db.sqlite',
+    logging: false // can be set to true for debugging
+});
 const router: Express = express();
+
+PatientData.initialize(sequelize);
 
 /** Logging */
 router.use(morgan('dev'));

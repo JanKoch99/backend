@@ -12,7 +12,7 @@ export interface PatientDataAttributes {
 }
 
 export class PatientData extends Model<PatientDataAttributes> implements PatientDataAttributes{
-    address: String;
+    address: String | undefined;
     aftername: String;
     city: String;
     id: Number;
