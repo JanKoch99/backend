@@ -22,7 +22,7 @@ export class PersonService {
             userName: body.userName,
             password: body.password,
             roleId: body.roleId,
-        }).then((data) => {
+        }).then((data: any) => {
             if (data.roleId !== null){
                 return Role.create({
                     id: data.id,
