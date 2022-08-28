@@ -6,6 +6,10 @@ import pationRoutes from './routes/patientdata';
 import medDataRoutes from './routes/MedData';
 import personRoutes from './routes/personRoutes';
 import db from './config/database.config'
+import {Role} from "./model/role.model";
+import { Person } from './model/person.model';
+import {MedData} from "./model/medData.model";
+import {PatientdataModel} from "./model/patientdata.model";
 
 db.sync().then(() => {
     console.log("connect to db")
@@ -51,23 +55,13 @@ router.use((req, res, next) => {
 
 /** Server */
 const httpServer = http.createServer(router);
-const PORT: any = process.env.PORT ?? 6060;
+const PORT: any = process.env.PORT || 6060;
 httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
 
 /** Insert data */
 
-// console.log("All models were synchronized successfully.");
-//     Role.create({id:0, auth: 'ROLE_APOTHEKER'})
-//     Role.create({id:1, auth: 'ROLE_PATIENT'})
-//     Role.create({id:2, auth: 'ROLE_DOCTER'})
-//
-//     // Docter
-//     Person.create({id:0, userName: 'docter', password: 'docter1', patientDataId: undefined, roleId: 3})
-//
-//     // Apotheker
-//     Person.create({id:1, userName: 'apotheker', password: 'apotheker1', patientDataId: undefined, roleId: 1})
-//
-//     // Person
-//     MedData.create({id:0, doctorId:0, dateOfIssue: new Date().toString(), drug: 'Testdrug', validUntil: new Date().toString(), useCase: 'Nie', originalAmount: 2, amountLeft: 2, patientDataId: 0})
-//     PatientdataModel.create({id:0, address: 'Teststrasse2', aftername: 'test', city: 'testcity', medDataId: 0, prename: 'person', sex: 'male', zip:1000})
-//     Person.create({id:2, userName: 'patient', password: 'patient1', patientDataId: 0, roleId: 2})
+console.log("All models were synchronized successfully.");
+    Role.create({id:0, auth: 'ROLE_APOTHEKER'});
+
+
+

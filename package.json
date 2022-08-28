@@ -4,6 +4,8 @@
   "description": "",
   "main": "source/server.ts",
   "scripts": {
+    "start": "nodemon source/server.ts",
+    "postinstall": "tsc",
     "dev": "nodemon source/server.ts",
     "build": "rm -rf build/ && prettier --write source/ && tsc"
   },
