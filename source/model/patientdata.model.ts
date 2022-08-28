@@ -6,6 +6,7 @@ interface PatientDataAttributes {
     id: number;
     prename: string;
     aftername: string;
+    birthday: string;
     sex: string;
     address: string;
     zip: number;
@@ -21,6 +22,10 @@ PatientdataModel.init(
             allowNull: false
         },
         aftername: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        birthday: {
             type: DataTypes.STRING,
             allowNull: false
         },

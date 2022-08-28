@@ -22,6 +22,7 @@ export class PatientdataService {
             medDataId: body.medDataId,
             prename: body.prename,
             aftername: body.aftername,
+            birthday: body.birthday,
             sex: body.sex,
             address: body.address,
             zip: body.zip,
