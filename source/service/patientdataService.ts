@@ -18,7 +18,6 @@ export class PatientdataService {
 
     public static async createPatientData(body: any) {
         return PatientdataModel.create({
-            id: 0,
             medDataId: body.medDataId,
             prename: body.prename,
             aftername: body.aftername,
@@ -27,8 +26,6 @@ export class PatientdataService {
             address: body.address,
             zip: body.zip,
             city: body.city,
-        }).then(() => {
-            return Promise.resolve('Entry successfully created')
         }).catch(() => {
             return Promise.reject('Could not create entry')
         });

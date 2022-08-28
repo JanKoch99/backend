@@ -17,12 +17,10 @@ export class RoleService {
     }
     public static async setRole(body: any) {
         return Role.create({
-            id: 0,
             auth: body.role
         }).catch((err: any) => {
             return Promise.reject(err);
         })
-
-    }
+    };
 
 }

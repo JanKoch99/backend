@@ -53,7 +53,6 @@ export class MedDataService {
 
     public static async createMedData(body: any) {
         return MedData.create({
-            id: 0,
             doctorId: body.doctorId,
             dateOfIssue: body.dateOfIssue,
             drug: body.drug,
@@ -62,8 +61,6 @@ export class MedDataService {
             originalAmount: body.originalAmount,
             amountLeft: body.originalAmount,
             patientDataId: body.personId
-        }).then(() => {
-            return Promise.resolve('Entry successfully created')
         }).catch(() => {
             return Promise.reject('Could not create entry')
         });

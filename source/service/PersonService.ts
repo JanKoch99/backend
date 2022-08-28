@@ -18,12 +18,11 @@ export class PersonService {
 
     public static async createPerson(body: any) {
         return Person.create({
-            id: 0,
             userName: body.userName,
             password: body.password,
             roleId: body.roleId,
-        }).catch((err: any) => {
-            return Promise.reject(err);
+        }).catch(() => {
+            return Promise.reject('failed to create Person');
         })
 
     }

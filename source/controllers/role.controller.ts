@@ -8,7 +8,7 @@ const getRole = async (req: Request, res: Response, next: NextFunction) => {
         .catch(err => res.json(err))
 };
 
-const getRole = async (req: Request, res: Response, next: NextFunction) => {
+const setRole = async (req: Request, res: Response, next: NextFunction) => {
     await RoleService.setRole(req.body)
         .then(posts => res.json(posts))
         .catch(err => res.json(err))
